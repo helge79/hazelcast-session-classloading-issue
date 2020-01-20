@@ -16,5 +16,6 @@ You should have installed Docker and Apache Maven on your system.
 3. Navigate to directory `tomcat7` (or `tomcat85`) and run `run.sh` shell file from terminal.
 4. Look for the last deployed application (in my case it is mostly `example.war` - if not replace `example` by `example2` below)
 5. Open a browser and enter `http://localhost:8080/example/hazelcast?key=foo&value=bar&action=Set+Attribute` to set a attribute
-6. Now get it via `http://localhost:8080/example/hazelcast?key=foo&action=Get+Attribute` => `ClassCastException` will be thrown
+6. Now get it via `http://localhost:8080/example/hazelcast?key=foo&action=Get+Attribute` => `ClassCastException` will be thrown: 
 
+   ```java.lang.ClassCastException: com.hazelcast.HazelcastSessionReplication.StringHolder cannot be cast to com.hazelcast.HazelcastSessionReplication.StringHolder```
