@@ -1,0 +1,33 @@
+version: '2.1'
+services:
+  portal:
+    image: nginx
+    ports:
+     - "8080:80"
+    volumes:
+     - ../tomcat7/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+     - tomcatServerOne:tomcat1
+     - tomcatServerTwo:tomcat2
+  tomcatServerOne:
+    image: tomcat:7.0-jdk8
+    ports:
+     - "8080"
+    volumes:
+     - ../target/example.war:/usr/local/tomcat/webapps/example.war
+     - ../target/example.war:/usr/local/tomcat/webapps/example2.war
+     - ../tomcat7/hazelcast-tomcat7-sessionmanager-1.1.5.jar:/usr/local/tomcat/lib/hazelcast-tomcat7-sessionmanager-1.1.5.jar
+     - ../tomcat7/hazelcast-all-3.11.2.jar:/usr/local/tomcat/lib/hazelcast-all-3.11.2.jar
+     - ../tomcat7/server.xml:/usr/local/tomcat/conf/server.xml
+     - ../tomcat7/context.xml:/usr/local/tomcat/conf/context.xml
+  tomcatServerTwo:
+    image: tomcat:7.0-jdk8
+    ports:
+     - "8080"
+    volumes:
+     - ../target/example.war:/usr/local/tomcat/webapps/example.war
+     - ../target/example.war:/usr/local/tomcat/webapps/example2.war
+     - ../tomcat7/hazelcast-tomcat7-sessionmanager-1.1.5.jar:/usr/local/tomcat/lib/hazelcast-tomcat7-sessionmanager-1.1.5.jar
+     - ../tomcat7/hazelcast-all-3.11.2.jar:/usr/local/tomcat/lib/hazelcast-all-3.11.2.jar
+     - ../tomcat7/server.xml:/usr/local/tomcat/conf/server.xml
+     - ../tomcat7/context.xml:/usr/local/tomcat/conf/context.xml
